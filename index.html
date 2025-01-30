@@ -41,14 +41,19 @@
             font-size: 2em;
         }
 
-        .quiz {
+        .quiz, .compatibility {
             font-size: 1.5em;
             text-align: left;
             margin: 20px;
         }
 
-        .quiz p {
+        .quiz p, .compatibility p {
             margin: 10px 0;
+        }
+
+        .quiz input, .compatibility input {
+            padding: 8px;
+            font-size: 1em;
         }
 
         .creator img {
@@ -67,6 +72,12 @@
             font-size: 1.2em;
             color: white;
         }
+
+        .result-message {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -74,6 +85,7 @@
     <nav>
         <a href="#countdown">Countdown</a>
         <a href="#quiz">Love Quiz</a>
+        <a href="#compatibility">Love Calculator</a>
         <a href="#creator">Meet the Creator</a>
     </nav>
 
@@ -124,6 +136,19 @@
             </form>
 
             <div id="quiz-result"></div>
+            <div class="result-message" id="quiz-message"></div>
+        </div>
+    </section>
+
+    <!-- Love Compatibility Section -->
+    <section id="compatibility">
+        <h2>Love Compatibility Calculator</h2>
+        <p>Enter your names and see how compatible you are! (Only Olivia and Charles/Charles and Olivia get 100%!)</p>
+        <div class="compatibility">
+            <input type="text" id="name1" placeholder="Enter first name">
+            <input type="text" id="name2" placeholder="Enter second name">
+            <button type="button" onclick="calculateCompatibility()">Calculate Compatibility</button>
+            <div id="compatibility-result"></div>
         </div>
     </section>
 
@@ -202,6 +227,23 @@
 
             result += `${correctAnswers * 12.5}%`; // Each correct answer adds 12.5%
             document.getElementById("quiz-result").innerText = result;
+            document.getElementById("quiz-message").innerText = `You got ${correctAnswers} out of 7 correct!`;
+        }
+
+        // Love Compatibility Calculator
+        function calculateCompatibility() {
+            const name1 = document.getElementById("name1").value.trim().toLowerCase();
+            const name2 = document.getElementById("name2").value.trim().toLowerCase();
+            let compatibility = 0;
+
+            // Check for special names
+            if ((name1 === "olivia" && name2 === "charles") || (name1 === "charles" && name2 === "olivia")) {
+                compatibility = 100;
+            } else {
+                compatibility = 0;
+            }
+
+            document.getElementById("compatibility-result").innerText = `Your compatibility score is: ${compatibility}%`;
         }
     </script>
 
