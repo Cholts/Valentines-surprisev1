@@ -34,193 +34,197 @@
         section {
             padding: 100px 20px;
             min-height: 100vh;
-            color: white;
         }
 
-        .countdown {
-            font-size: 2em;
+        .heartCanvas {
+            border: 2px solid white;
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
         }
 
-        .quiz, .compatibility {
+        .compliments {
+            margin-top: 20px;
             font-size: 1.5em;
-            text-align: left;
-            margin: 20px;
         }
 
-        .quiz p, .compatibility p {
-            margin: 10px 0;
-        }
-
-        .quiz input, .compatibility input {
-            padding: 8px;
-            font-size: 1em;
-        }
-
-        .creator img {
-            width: 300px;
-            border-radius: 15px;
-            margin-top: 10px;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        footer {
-            background-color: #ff1493;
-            padding: 20px;
-            font-size: 1.2em;
+        .challenge-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ff69b4;
+            border: none;
             color: white;
+            cursor: pointer;
         }
 
-        .result-message {
+        .love-challenge {
             font-size: 1.2em;
             margin-top: 20px;
         }
 
+        .compatibility-result {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#countdown">Countdown</a>
-        <a href="#quiz">Love Quiz</a>
-        <a href="#compatibility">Love Calculator</a>
-        <a href="#creator">Meet the Creator</a>
+        <a href="#heartDrawing">Heart Drawing</a>
+        <a href="#compliments">Compliment Generator</a>
+        <a href="#loveChallenge">Love Challenge</a>
+        <a href="#compatibility">Astrological Compatibility</a>
+        <a href="#horoscope">Love Horoscope</a>
+        <a href="#wouldYouRather">Would You Rather</a>
+        <a href="#trivia">Valentine's Trivia</a>
     </nav>
 
-    <!-- Countdown Section -->
-    <section id="countdown">
-        <h1>Happy Valentine's Day, My Darlin dearest! 💖</h1>
-        <h2>Countdown to Our 2-Year Anniversary</h2>
-        <div class="countdown" id="countdown-timer"></div>
+    <section id="heartDrawing">
+        <h1>Draw Your Heart</h1>
+        <canvas class="heartCanvas" id="heartCanvas"></canvas>
     </section>
 
-    <!-- Love Quiz Section -->
-    <section id="quiz">
-        <h2>Love Quiz</h2>
-        <div class="quiz">
-            <form id="quiz-form">
-                <p>1. When is my birthday?</p>
-                <input type="text" id="question1" placeholder="Your answer">
-
-                <p>2. What’s your special nickname?</p>
-                <input type="text" id="question2" placeholder="Your answer">
-
-                <p>3. What’s my favorite color?</p>
-                <input type="text" id="question3" placeholder="Your answer">
-
-                <p>4. Who takes the best photos of us (Sadly)?</p>
-                <input type="text" id="question4" placeholder="Your answer">
-
-                <p>5. What’s the name of my alive dog?</p>
-                <input type="text" id="question5" placeholder="Your answer">
-
-                <p>6. What’s the name of my dog who has passed away?</p>
-                <input type="text" id="question6" placeholder="Your answer">
-
-                <p>7. What’s my cat’s name?</p>
-                <input type="text" id="question7" placeholder="Your answer">
-
-                <button type="button" onclick="submitQuiz()">Submit Answers</button>
-            </form>
-
-            <div id="quiz-result"></div>
-        </div>
+    <section id="compliments">
+        <h2>Random Compliment</h2>
+        <div id="compliment"></div>
+        <button onclick="generateCompliment()">Generate Compliment</button>
     </section>
 
-    <!-- Love Compatibility Calculator Section -->
+    <section id="loveChallenge">
+        <h2>Love Challenge</h2>
+        <button class="challenge-btn" onclick="generateLoveChallenge()">Get Love Challenge</button>
+        <div id="love-challenge" class="love-challenge"></div>
+    </section>
+
     <section id="compatibility">
-        <h2>Love Compatibility Calculator</h2>
-        <div class="compatibility">
-            <p>Enter two names to calculate your love compatibility! 💖</p>
-            <input type="text" id="name1" placeholder="Enter first name">
-            <input type="text" id="name2" placeholder="Enter second name">
-            <button type="button" onclick="calculateCompatibility()">Calculate Compatibility</button>
-            <div id="compatibility-result"></div>
-        </div>
+        <h2>Astrological Compatibility</h2>
+        <label for="name1">Enter Your Name:</label>
+        <input type="text" id="name1" placeholder="Your Name">
+        <label for="name2">Enter Their Name:</label>
+        <input type="text" id="name2" placeholder="Their Name">
+        <button onclick="checkCompatibility()">Check Compatibility</button>
+        <div id="compatibility-result" class="compatibility-result"></div>
     </section>
 
-    <!-- Meet the Creator Section -->
-    <section id="creator">
-        <h2>Meet the Creator</h2>
-        <img src="creator.jpg" alt="Meet the Creator">
+    <section id="horoscope">
+        <h2>Your Love Horoscope</h2>
+        <label for="birthdate">Enter your Birthdate:</label>
+        <input type="date" id="birthdate">
+        <button onclick="getHoroscope()">Get Horoscope</button>
+        <div id="horoscope-result"></div>
     </section>
 
-    <footer>
-        <p>Made with 💖 for you! Happy Valentine's Day!</p>
-    </footer>
+    <section id="wouldYouRather">
+        <h2>Would You Rather (Love Edition)</h2>
+        <p>Would you rather go on a hot air balloon ride or a candlelit dinner?</p>
+        <button onclick="chooseOption('hot air balloon ride')">Hot Air Balloon Ride</button>
+        <button onclick="chooseOption('candlelit dinner')">Candlelit Dinner</button>
+    </section>
+
+    <section id="trivia">
+        <h2>Valentine's Trivia</h2>
+        <p>Who is the patron saint of Valentine's Day?</p>
+        <button onclick="checkTriviaAnswer('Saint Valentine')">Saint Valentine</button>
+        <button onclick="checkTriviaAnswer('Cupid')">Cupid</button>
+        <div id="trivia-result"></div>
+    </section>
 
     <script>
-        function countdownTimer() {
-            const anniversaryDate = new Date("June 9, 2025 00:00:00").getTime();
-            const now = new Date().getTime();
-            const distance = anniversaryDate - now;
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // 1. Heart Drawing
+        let canvas = document.getElementById('heartCanvas');
+        let ctx = canvas.getContext('2d');
+        canvas.width = 500;
+        canvas.height = 400;
 
-            document.getElementById("countdown-timer").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s left!`;
-        }
-        setInterval(countdownTimer, 1000);
-
-        // Quiz Function
-        function submitQuiz() {
-            const correctAnswers = {
-                question1: "April 23, 2003",
-                question2: "Darlin",
-                question3: "Blood red",
-                question4: "Katie",
-                question5: "Ranger",
-                question6: "Star",
-                question7: "Murphy"
-            };
-
-            const userAnswers = {
-                question1: document.getElementById("question1").value,
-                question2: document.getElementById("question2").value,
-                question3: document.getElementById("question3").value,
-                question4: document.getElementById("question4").value,
-                question5: document.getElementById("question5").value,
-                question6: document.getElementById("question6").value,
-                question7: document.getElementById("question7").value
-            };
-
-            let score = 0;
-            let feedback = "";
-
-            for (let key in correctAnswers) {
-                if (userAnswers[key].toLowerCase() === correctAnswers[key].toLowerCase()) {
-                    score++;
-                    feedback += `<p>Question ${key.charAt(key.length - 1)}: Correct!</p>`;
-                } else {
-                    feedback += `<p>Question ${key.charAt(key.length - 1)}: Wrong! Correct answer: ${correctAnswers[key]}</p>`;
-                }
-            }
-
-            const resultText = `You got ${score} out of 7 correct!`;
-            const resultMessage = score === 7 ? "Perfect! 💖" : "Good try! ❤️";
-
-            document.getElementById("quiz-result").innerHTML = `${resultText}<br>${resultMessage}<br><br>${feedback}`;
+        function drawHeart(x, y, size) {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.bezierCurveTo(x - size, y - size, x - size, y + size, x, y + size);
+            ctx.bezierCurveTo(x + size, y + size, x + size, y - size, x, y);
+            ctx.fillStyle = "red";
+            ctx.fill();
         }
 
-        // Compatibility Calculator Function
-        function calculateCompatibility() {
-            const name1 = document.getElementById("name1").value.toLowerCase();
-            const name2 = document.getElementById("name2").value.toLowerCase();
-            let compatibilityScore = 0;
+        canvas.addEventListener('mousemove', (event) => {
+            const x = event.offsetX;
+            const y = event.offsetY;
+            drawHeart(x, y, 10);
+        });
 
-            if ((name1 === "olivia" && name2 === "charles") || (name1 === "charles" && name2 === "olivia")) {
-                compatibilityScore = 100;
+        // 2. Compliment Generator
+        const compliments = [
+            "You're the peanut butter to my jelly!",
+            "I’m so lucky to have you in my life.",
+            "You light up my world.",
+            "You make my heart skip a beat.",
+            "You’re the apple of my eye."
+        ];
+
+        function generateCompliment() {
+            const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
+            document.getElementById("compliment").innerText = randomCompliment;
+        }
+
+        // 3. Love Challenge Generator
+        const loveChallenges = [
+            "Compliment your partner five times today!",
+            "Send a sweet message to your best friend!",
+            "Give someone a hug today!",
+            "Plan a romantic date night.",
+            "Say something kind to a stranger today."
+        ];
+
+        function generateLoveChallenge() {
+            const randomChallenge = loveChallenges[Math.floor(Math.random() * loveChallenges.length)];
+            document.getElementById("love-challenge").innerText = randomChallenge;
+        }
+
+        // 4. Astrological Compatibility
+        function checkCompatibility() {
+            const name1 = document.getElementById("name1").value;
+            const name2 = document.getElementById("name2").value;
+            if ((name1.toLowerCase() === "olivia" && name2.toLowerCase() === "charles") || 
+                (name1.toLowerCase() === "charles" && name2.toLowerCase() === "olivia")) {
+                document.getElementById("compatibility-result").innerText = "100% Compatibility! The perfect match!";
             } else {
-                compatibilityScore = 0;
+                document.getElementById("compatibility-result").innerText = "0% Compatibility. Maybe try again with Olivia and Charles!";
             }
+        }
 
-            document.getElementById("compatibility-result").innerHTML = `Your compatibility score is: ${compatibilityScore}%`;
+        // 5. Horoscope Generator
+        function getHoroscope() {
+            const birthdate = new Date(document.getElementById("birthdate").value);
+            const month = birthdate.getMonth() + 1; // Month is 0-based
+            const day = birthdate.getDate();
+
+            if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) {
+                document.getElementById("horoscope-result").innerText = "Taurus: Your love life is going to be on fire today!";
+            } else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
+                document.getElementById("horoscope-result").innerText = "Sagittarius: A romantic surprise awaits you soon!";
+            } else {
+                document.getElementById("horoscope-result").innerText = "Great love energy is on its way!";
+            }
+        }
+
+        // 6. Would You Rather
+        function chooseOption(option) {
+            alert(`You chose: ${option}`);
+        }
+
+        // 7. Trivia
+        function checkTriviaAnswer(answer) {
+            if (answer === "Saint Valentine") {
+                document.getElementById("trivia-result").innerText = "Correct! Saint Valentine is the patron saint of Valentine's Day!";
+            } else {
+                document.getElementById("trivia-result").innerText = "Oops, that's not quite right. Try again!";
+            }
         }
     </script>
-
 </body>
 </html>
