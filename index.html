@@ -12,7 +12,6 @@
             color: white;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
         }
 
         nav {
@@ -60,65 +59,11 @@
             scroll-behavior: smooth;
         }
 
-        .heart {
-            position: absolute;
-            color: red;
-            font-size: 2em;
-            animation: floatHeart 5s ease-in-out infinite;
-        }
-
-        @keyframes floatHeart {
-            0% { top: 100%; left: 0%; opacity: 1; }
-            100% { top: -10%; left: 100%; opacity: 0; }
-        }
-
-        .candy {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 40px;
-            height: 40px;
-            background-color: #ff69b4;
-            border-radius: 50%;
-            animation: fallCandy 2s ease-in-out forwards;
-        }
-
-        @keyframes fallCandy {
-            0% { top: -10%; opacity: 1; }
-            100% { top: 80%; opacity: 0; }
-        }
-
-        /* Footer */
         footer {
             background-color: #ff1493;
             padding: 20px;
             font-size: 1.2em;
             color: white;
-        }
-
-        .mystery-box {
-            display: inline-block;
-            padding: 20px;
-            background: #ff69b4;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 20px;
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .quiz {
-                font-size: 1.2em;
-            }
-            .countdown {
-                font-size: 1.5em;
-            }
         }
     </style>
 </head>
@@ -152,30 +97,26 @@
         <h2>Love Quiz</h2>
         <div class="quiz">
             <form id="quiz-form">
-                <!-- Questions will be randomized -->
-                <p id="question1"></p>
+                <p id="question1">When is my birthday?</p>
                 <input type="text" id="answer1" placeholder="Your answer">
 
-                <p id="question2"></p>
+                <p id="question2">What’s your special nickname?</p>
                 <input type="text" id="answer2" placeholder="Your answer">
 
-                <p id="question3"></p>
+                <p id="question3">What’s my favorite color?</p>
                 <input type="text" id="answer3" placeholder="Your answer">
 
-                <p id="question4"></p>
+                <p id="question4">Who takes the best photos of us (Sadly)?</p>
                 <input type="text" id="answer4" placeholder="Your answer">
 
-                <p id="question5"></p>
+                <p id="question5">What’s the name of my alive dog?</p>
                 <input type="text" id="answer5" placeholder="Your answer">
 
-                <p id="question6"></p>
+                <p id="question6">What’s the name of my dog who has passed away?</p>
                 <input type="text" id="answer6" placeholder="Your answer">
 
-                <p id="question7"></p>
+                <p id="question7">What’s my cat’s name?</p>
                 <input type="text" id="answer7" placeholder="Your answer">
-
-                <p id="question8"></p>
-                <input type="text" id="answer8" placeholder="Your answer">
 
                 <button type="button" onclick="submitQuiz()">Submit Answers</button>
             </form>
@@ -188,11 +129,6 @@
     <section id="creator">
         <h2>Meet the Creator</h2>
         <img src="creator.jpg" alt="Meet the Creator">
-    </section>
-
-    <!-- Mystery Box -->
-    <section>
-        <div class="mystery-box" onclick="openMysteryBox()">Open the Mystery Box!</div>
     </section>
 
     <!-- Footer -->
@@ -238,50 +174,32 @@
         }
         setInterval(countdownTimer, 1000);
 
-        // Randomized quiz questions
-        const questions = [
-            { question: "When is my birthday?", answer: "April 23, 2003" },
-            { question: "What’s your special nickname?", answer: "Darlin" },
-            { question: "What’s my favorite color?", answer: "Blood red" },
-            { question: "Who takes the best photos of us (Sadly)?", answer: "Katie" },
-            { question: "What’s the name of my alive dog?", answer: "Ranger" },
-            { question: "What’s the name of my dog who has passed away?", answer: "Star" },
-            { question: "What’s my cat’s name?", answer: "Murphy" }
-        ];
-
-        // Shuffle the questions
-        questions.sort(() => Math.random() - 0.5);
-
-        // Add randomized questions to the quiz
-        questions.forEach((q, index) => {
-            document.getElementById(`question${index + 1}`).innerText = q.question;
-            document.getElementById(`answer${index + 1}`).setAttribute("placeholder", `Your answer (e.g. ${q.answer})`);
-        });
-
         // Submit quiz answers
         function submitQuiz() {
             let result = "Your love compatibility score is: ";
             let correctAnswers = 0;
 
-            questions.forEach((q, index) => {
-                const userAnswer = document.getElementById(`answer${index + 1}`).value;
-                if (userAnswer.trim().toLowerCase() === q.answer.toLowerCase()) {
+            const correctAnswersArray = [
+                { answer: "April 23, 2003" },
+                { answer: "Darlin" },
+                { answer: "Blood red" },
+                { answer: "Katie" },
+                { answer: "Ranger" },
+                { answer: "Star" },
+                { answer: "Murphy" }
+            ];
+
+            // Loop through answers
+            for (let i = 0; i < correctAnswersArray.length; i++) {
+                const userAnswer = document.getElementById(`answer${i + 1}`).value.trim().toLowerCase();
+                const correctAnswer = correctAnswersArray[i].answer.toLowerCase();
+                if (userAnswer === correctAnswer) {
                     correctAnswers++;
                 }
-            });
+            }
 
             result += `${correctAnswers * 12.5}%`; // Each correct answer adds 12.5%
             document.getElementById("quiz-result").innerText = result;
-
-            // Show candy falling animation
-            let candy = document.createElement('div');
-            candy.classList.add('candy');
-            document.body.appendChild(candy);
-        }
-
-        // Mystery Box
-        function openMysteryBox() {
-            alert("HAPPY VALENTINES DARLIN DEAREST!");
         }
     </script>
 </body>
