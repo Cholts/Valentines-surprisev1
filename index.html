@@ -35,6 +35,18 @@
         .countdown {
             font-size: 2em;
         }
+        .quiz {
+            font-size: 1.5em;
+            text-align: left;
+        }
+        .quiz p {
+            margin: 10px 0;
+        }
+        .quiz input {
+            font-size: 1em;
+            padding: 10px;
+            margin: 10px;
+        }
         .creator img {
             width: 300px;
             border-radius: 15px;
@@ -43,22 +55,76 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .quiz {
+                font-size: 1.2em;
+            }
+            .countdown {
+                font-size: 1.5em;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Navigation -->
     <nav>
-        <a href="index.html">Home</a>
-        <a href="quiz.html">Love Quiz</a>
-        <a href="creator.html">Meet the Creator</a>
+        <a href="#countdown">Countdown</a>
+        <a href="#quiz">Love Quiz</a>
+        <a href="#creator">Meet the Creator</a>
     </nav>
 
+    <!-- Countdown Section -->
     <section id="countdown">
         <h1>Happy Valentine's Day, My Darlin dearest! 💖</h1>
         <h2>Countdown to Our 2-Year Anniversary</h2>
         <div class="countdown" id="countdown-timer"></div>
     </section>
-    
+
+    <!-- Love Quiz Section -->
+    <section id="quiz">
+        <h2>Love Quiz</h2>
+        <div class="quiz">
+            <form id="quiz-form">
+                <p>1. When is my birthday?</p>
+                <input type="text" id="question1" placeholder="Your answer">
+
+                <p>2. What’s your special nickname?</p>
+                <input type="text" id="question2" placeholder="Your answer">
+
+                <p>3. What’s my favorite color?</p>
+                <input type="text" id="question4" placeholder="Your answer">
+
+                <p>4. Who takes the best photos of us (Sadly)?</p>
+                <input type="text" id="question5" placeholder="Your answer">
+
+                <p>5. What’s the name of my alive dog?</p>
+                <input type="text" id="question6" placeholder="Your answer">
+
+                <p>6. What’s the name of my dog who has passed away?</p>
+                <input type="text" id="question7" placeholder="Your answer">
+
+                <p>7. What’s my cat’s name?</p>
+                <input type="text" id="question8" placeholder="Your answer">
+
+                <button type="button" onclick="submitQuiz()">Submit Answers</button>
+            </form>
+
+            <div id="quiz-result"></div>
+        </div>
+    </section>
+
+    <!-- Meet the Creator Section -->
+    <section id="creator">
+        <h2>Meet the Creator</h2>
+        <img src="images/creator.jpg" alt="Meet the Creator">
+    </section>
+
+    <!-- Scripts -->
     <script>
+        // Countdown Timer
         function countdownTimer() {
             const anniversaryDate = new Date("June 9, 2025 00:00:00").getTime();
             const now = new Date().getTime();
@@ -72,6 +138,46 @@
             document.getElementById("countdown-timer").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s left!`;
         }
         setInterval(countdownTimer, 1000);
+
+        // Quiz Submission and Result Display
+        function submitQuiz() {
+            // Correct answers
+            const correctAnswers = {
+                question1: "April 23, 2003",
+                question2: "Darlin",
+                question4: "Blood red",
+                question5: "Katie",
+                question6: "Ranger",
+                question7: "Star",
+                question8: "Murphy"
+            };
+
+            // Get user inputs
+            const userAnswers = {
+                question1: document.getElementById("question1").value,
+                question2: document.getElementById("question2").value,
+                question4: document.getElementById("question4").value,
+                question5: document.getElementById("question5").value,
+                question6: document.getElementById("question6").value,
+                question7: document.getElementById("question7").value,
+                question8: document.getElementById("question8").value
+            };
+
+            // Check answers
+            let score = 0;
+            let feedback = "";
+            for (let key in correctAnswers) {
+                if (userAnswers[key].toLowerCase() === correctAnswers[key].toLowerCase()) {
+                    score++;
+                    feedback += `<p style="color:green;">Question: ${key} - Correct!</p>`;
+                } else {
+                    feedback += `<p style="color:red;">Question: ${key} - Incorrect. Correct answer: ${correctAnswers[key]}</p>`;
+                }
+            }
+
+            // Display results
+            document.getElementById("quiz-result").innerHTML = `${feedback}<br>You got ${score} out of ${Object.keys(correctAnswers).length} correct!`;
+        }
     </script>
 </body>
 </html>
