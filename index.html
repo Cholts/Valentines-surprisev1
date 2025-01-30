@@ -49,9 +49,9 @@
 
         .heartCanvas {
             border: 2px solid white;
-            width: 100%;
-            height: 400px;
             background: white;
+            width: 300px;
+            height: 300px;
         }
 
         /* Smooth scrolling */
@@ -71,7 +71,7 @@
         <a href="#horoscope">Love Horoscope</a>
     </nav>
 
-    <!-- ❤️ Quiz Section -->
+    <!-- ❤️ Love Quiz -->
     <section id="quiz">
         <h1>Love Quiz</h1>
         <form id="quizForm">
@@ -101,10 +101,10 @@
         <div id="quizResult" class="result"></div>
     </section>
 
-    <!-- ❤️ Interactive Heart Drawing -->
+    <!-- ❤️ Draw a Heart -->
     <section id="heartDrawing">
         <h1>Draw a Heart</h1>
-        <canvas class="heartCanvas" id="heartCanvas"></canvas>
+        <canvas class="heartCanvas" id="heartCanvas"></canvas><br>
         <button onclick="clearCanvas()">Clear</button>
     </section>
 
@@ -141,7 +141,6 @@
         <div id="horoscopeResult"></div>
     </section>
 
-    <!-- ❤️ JavaScript -->
     <script>
         // ✅ Love Quiz Checker
         function checkQuiz() {
@@ -185,15 +184,15 @@
             let day = birthdate.getDate();
 
             if (month === 4 && day === 23) {
-                document.getElementById("horoscopeResult").innerText = "Taurus: Your love life is amazing today!";
+                document.getElementById("horoscopeResult").innerText = "Taurus: Your love life is amazing today! Olivia is the best GF ever!";
             } else if (month === 12 && day === 5) {
-                document.getElementById("horoscopeResult").innerText = "Sagittarius: Get ready for a surprise!";
+                document.getElementById("horoscopeResult").innerText = "Sagittarius: Get ready for a surprise from someone special!";
             } else {
-                document.getElementById("horoscopeResult").innerText = "You will die alone.";
+                document.getElementById("horoscopeResult").innerText = "Your love future is uncertain... Try again?";
             }
         }
 
-        // ✅ Drawing a Heart
+        // ✅ Heart Drawing Works
         let canvas = document.getElementById("heartCanvas");
         let ctx = canvas.getContext("2d");
         let drawing = false;
@@ -204,12 +203,24 @@
 
         function draw(event) {
             if (!drawing) return;
-            ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+            let rect = canvas.getBoundingClientRect();
+            ctx.lineTo(event.clientX - rect.left, event.clientY - rect.top);
             ctx.stroke();
         }
 
         function clearCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // ✅ Compliment Generator
+        function generateCompliment() {
+            const compliments = ["You're amazing!", "You're so loved!", "You're my favorite person!"];
+            document.getElementById("compliment").innerText = compliments[Math.floor(Math.random() * compliments.length)];
+        }
+
+        // ✅ Love Challenge
+        function generateLoveChallenge() {
+            document.getElementById("loveChallengeResult").innerText = "Tell someone you love them today!";
         }
     </script>
 
