@@ -51,7 +51,7 @@
             border: 2px solid white;
             width: 100%;
             height: 400px;
-            margin-top: 20px;
+            background: white;
         }
 
         /* Smooth scrolling */
@@ -69,8 +69,6 @@
         <a href="#loveChallenge">Love Challenge</a>
         <a href="#compatibility">Love Compatibility</a>
         <a href="#horoscope">Love Horoscope</a>
-        <a href="#wouldYouRather">Would You Rather</a>
-        <a href="#trivia">Valentine's Trivia</a>
     </nav>
 
     <!-- ❤️ Quiz Section -->
@@ -107,6 +105,7 @@
     <section id="heartDrawing">
         <h1>Draw a Heart</h1>
         <canvas class="heartCanvas" id="heartCanvas"></canvas>
+        <button onclick="clearCanvas()">Clear</button>
     </section>
 
     <!-- ❤️ Compliment Generator -->
@@ -175,7 +174,7 @@
             if ((name1 === "olivia" && name2 === "charles") || (name1 === "charles" && name2 === "olivia")) {
                 document.getElementById("compatibilityResult").innerText = "100% - The perfect couple! 💖";
             } else {
-                document.getElementById("compatibilityResult").innerText = "0% - Oof... Try again with Olivia and Charles! if your not them maybe get some cats?";
+                document.getElementById("compatibilityResult").innerText = "0% - Oof... Try again with Olivia and Charles!";
             }
         }
 
@@ -186,12 +185,31 @@
             let day = birthdate.getDate();
 
             if (month === 4 && day === 23) {
-                document.getElementById("horoscopeResult").innerText = "Taurus: Your love life is amazing today! You have an amazing GF BRO!";
+                document.getElementById("horoscopeResult").innerText = "Taurus: Your love life is amazing today!";
             } else if (month === 12 && day === 5) {
-                document.getElementById("horoscopeResult").innerText = "Sagittarius: Get ready for a surprise from someone special! Like maybe some jewlery? idk maybe make sure to be nice to your BF?";
+                document.getElementById("horoscopeResult").innerText = "Sagittarius: Get ready for a surprise!";
             } else {
-                document.getElementById("horoscopeResult").innerText = "you will die alone";
+                document.getElementById("horoscopeResult").innerText = "You will die alone.";
             }
+        }
+
+        // ✅ Drawing a Heart
+        let canvas = document.getElementById("heartCanvas");
+        let ctx = canvas.getContext("2d");
+        let drawing = false;
+
+        canvas.addEventListener("mousedown", () => drawing = true);
+        canvas.addEventListener("mouseup", () => drawing = false);
+        canvas.addEventListener("mousemove", draw);
+
+        function draw(event) {
+            if (!drawing) return;
+            ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+            ctx.stroke();
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
     </script>
 
