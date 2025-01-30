@@ -72,20 +72,20 @@
             scroll-behavior: smooth;
         }
 
-        /* Floating hearts */
-        .floating-heart {
+        /* Floating candles/fireflies */
+        .floating-candle {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background: #FFD700;
+            width: 10px;
+            height: 10px;
+            background: yellow;
             border-radius: 50%;
-            animation: floatUp 5s ease-in-out infinite;
+            animation: floatUp 3s ease-in-out infinite;
         }
 
         @keyframes floatUp {
-            0% { top: 100vh; left: 0; opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { top: -30px; left: 100%; opacity: 1; }
+            0% { top: 100vh; opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { top: -10px; opacity: 1; }
         }
 
         /* 3D Spinning Heart */
@@ -180,60 +180,11 @@
         @keyframes blink-caret {
             50% { border-color: transparent; }
         }
-
-        /* Floating text */
-        .floating-text {
-            position: absolute;
-            color: #FFD700;
-            font-size: 1.5em;
-            font-family: 'Brush Script MT', cursive;
-            animation: floatText 10s ease-in-out infinite;
-        }
-
-        @keyframes floatText {
-            0% { top: 0; opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { top: 100vh; opacity: 1; }
-        }
-
-        /* Side floating decorations */
-        .floating-decor {
-            position: absolute;
-            animation: floatDecor 10s ease-in-out infinite;
-        }
-
-        .left-decor {
-            left: -50px;
-        }
-
-        .right-decor {
-            right: -50px;
-        }
-
-        @keyframes floatDecor {
-            0% { transform: scale(0.5); opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { transform: scale(1.5); opacity: 0.5; }
-        }
     </style>
 </head>
 <body>
 
     <div class="spinning-heart">❤️</div>
-    
-    <!-- Floating Hearts -->
-    <div class="floating-heart" style="top: 10%; left: 10%; animation-delay: 2s;"></div>
-    <div class="floating-heart" style="top: 30%; left: 50%; animation-delay: 4s;"></div>
-    <div class="floating-heart" style="top: 60%; left: 80%; animation-delay: 3s;"></div>
-
-    <!-- Floating Text -->
-    <div class="floating-text" style="top: 20%; left: 15%;">You're loved! 💖</div>
-    <div class="floating-text" style="top: 30%; right: 10%;">Forever and always! 💞</div>
-
-    <!-- Floating Decorative Hearts on sides -->
-    <div class="floating-decor left-decor">❤️</div>
-    <div class="floating-decor right-decor">❤️</div>
-
     <nav>
         <a href="#quiz">Love Quiz</a>
         <a href="#heartDrawing">Draw a Heart</a>
@@ -242,6 +193,16 @@
         <a href="#compatibility">Love Compatibility</a>
         <a href="#horoscope">Love Horoscope</a>
     </nav>
+
+    <!-- Floating Candles/Fireflies -->
+    <div class="floating-candle" style="left: 10%; animation-delay: 2s;"></div>
+    <div class="floating-candle" style="left: 30%; animation-delay: 4s;"></div>
+    <div class="floating-candle" style="left: 50%; animation-delay: 1s;"></div>
+    <div class="floating-candle" style="left: 70%; animation-delay: 3s;"></div>
+    <div class="floating-candle" style="left: 90%; animation-delay: 5s;"></div>
+    <div class="floating-candle" style="left: 15%; animation-delay: 6s;"></div>
+    <div class="floating-candle" style="left: 85%; animation-delay: 7s;"></div>
+    <div class="floating-candle" style="left: 60%; animation-delay: 8s;"></div>
 
     <!-- ❤️ Love Quiz -->
     <section id="quiz">
@@ -407,47 +368,52 @@
         function checkCompatibility() {
             let name1 = document.getElementById("name1").value.toLowerCase();
             let name2 = document.getElementById("name2").value.toLowerCase();
-            const compatibility = Math.random() * 100;
-            document.getElementById("compatibilityResult").innerText = 
-                `Your love compatibility score is ${compatibility.toFixed(2)}%!`;
-        }
 
-        // ✅ Love Horoscope
-        function getHoroscope() {
-            let birthdate = new Date(document.getElementById("birthdate").value);
-            let month = birthdate.getMonth();
-            let horoscope = "";
-            switch (month) {
-                case 0: horoscope = "You're a Capricorn! You're practical and grounded."; break;
-                case 1: horoscope = "You're an Aquarius! You're an inventive and independent spirit."; break;
-                case 2: horoscope = "You're a Pisces! You're intuitive and deeply emotional."; break;
-                case 3: horoscope = "You're an Aries! You're energetic and adventurous."; break;
-                case 4: horoscope = "You're a Taurus! You're reliable and grounded."; break;
-                case 5: horoscope = "You're a Gemini! You're adaptable and curious."; break;
-                case 6: horoscope = "You're a Cancer! You're sensitive and compassionate."; break;
-                case 7: horoscope = "You're a Leo! You're confident and creative."; break;
-                case 8: horoscope = "You're a Virgo! You're analytical and practical."; break;
-                case 9: horoscope = "You're a Libra! You're diplomatic and charming."; break;
-                case 10: horoscope = "You're a Scorpio! You're intense and passionate."; break;
-                case 11: horoscope = "You're a Sagittarius! You're optimistic and adventurous."; break;
+            if ((name1 === "olivia" && name2 === "charles") || (name1 === "charles" && name2 === "olivia")) {
+                document.getElementById("compatibilityResult").innerText = "100% - The perfect couple! 💖";
+            } else {
+                document.getElementById("compatibilityResult").innerText = "Get some cats maybe?";
             }
-            document.getElementById("horoscopeResult").innerText = horoscope;
         }
 
-        // ✅ Draw a Heart
+        // ✅ Horoscope Generator
+        function getHoroscope() {
+            const birthDate = new Date(document.getElementById("birthdate").value);
+            const month = birthDate.getMonth() + 1;
+            const day = birthDate.getDate();
+
+            if ((month === 12 && day === 5) || (month === 4 && day === 23)) {
+                document.getElementById("horoscopeResult").innerText = "Your love life is as bright as the stars! 🌟";
+            } else {
+                document.getElementById("horoscopeResult").innerText = "Your love life is... well, you might want to stay inside today. Better luck next time. 😈";
+            }
+        }
+
+        // Draw a Heart functionality
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+
+        canvas.addEventListener('mousedown', function(e) {
+            drawing = true;
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (drawing) {
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            }
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            drawing = false;
+        });
+
         function clearCanvas() {
-            const canvas = document.getElementById("heartCanvas");
-            const ctx = canvas.getContext("2d");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
-
-        // Set canvas size on load
-        window.onload = () => {
-            const canvas = document.getElementById("heartCanvas");
-            canvas.width = 300;
-            canvas.height = 300;
-        };
     </script>
-
 </body>
 </html>
