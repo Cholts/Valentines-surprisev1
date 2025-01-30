@@ -339,7 +339,15 @@
                 "You're so loved!", 
                 "You're my favorite person!", 
                 "You light up my life!", 
-                "You're my forever Valentine!"
+                "You're my forever Valentine!",
+                "Eres lo más hermoso que he visto", 
+                "Sos el sol de mi vida", 
+                "Mi vida sin vos sería un caos", 
+                "Qué lindo es tenerte", 
+                "Me haces sentir la persona más feliz",
+                "You're hotter than a jalapeño in the summer, sugar!", 
+                "You're sweeter than a pecan pie, darling!", 
+                "You're the best thing since grits!"
             ];
             document.getElementById("compliment").innerText = compliments[Math.floor(Math.random() * compliments.length)];
         }
@@ -347,11 +355,11 @@
         // ✅ Love Challenge
         function generateLoveChallenge() {
             const challenges = [
-                "Write a love note and leave it somewhere unexpected!", 
-                "Give 5 compliments today!", 
-                "Plan a surprise date night!", 
-                "Send a sweet text message right now!", 
-                "Make a list of things you love about your partner!"
+                "Take your partner to see Gladiator 2!", 
+                "Watch Tombstone together!", 
+                "Watch a Barbie movie with them!", 
+                "Go on a picnic date at Villa Pamphili!", 
+                "Give your partner a sweet kiss right now!"
             ];
             document.getElementById("loveChallengeResult").innerText = challenges[Math.floor(Math.random() * challenges.length)];
         }
@@ -364,8 +372,47 @@
             if ((name1 === "olivia" && name2 === "charles") || (name1 === "charles" && name2 === "olivia")) {
                 document.getElementById("compatibilityResult").innerText = "100% - The perfect couple! 💖";
             } else {
-                document.getElementById("compatibilityResult").innerText = "0% - Oof... Try again!";
+                document.getElementById("compatibilityResult").innerText = "Get some cats maybe?";
             }
+        }
+
+        // ✅ Horoscope Generator
+        function getHoroscope() {
+            const birthDate = new Date(document.getElementById("birthdate").value);
+            const month = birthDate.getMonth() + 1;
+            const day = birthDate.getDate();
+
+            if ((month === 12 && day === 5) || (month === 4 && day === 23)) {
+                document.getElementById("horoscopeResult").innerText = "Your love life is as bright as the stars! 🌟";
+            } else {
+                document.getElementById("horoscopeResult").innerText = "Your love life is... well, you might want to stay inside today. Better luck next time. 😈";
+            }
+        }
+
+        // Draw a Heart functionality
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+
+        canvas.addEventListener('mousedown', function(e) {
+            drawing = true;
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (drawing) {
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            }
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            drawing = false;
+        });
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
     </script>
 </body>
