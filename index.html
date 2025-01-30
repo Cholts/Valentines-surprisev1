@@ -34,7 +34,7 @@
         section {
             padding: 100px 20px;
             min-height: 100vh;
-            color: white; /* Explicitly set text color */
+            color: white;
         }
 
         .countdown {
@@ -89,11 +89,6 @@
         <a href="#creator">Meet the Creator</a>
     </nav>
 
-    <!-- Pop-up Greeting -->
-    <div id="greeting-popup" style="display: none;">
-        <h2>Welcome, my love! 💖</h2>
-    </div>
-
     <!-- Countdown Section -->
     <section id="countdown">
         <h1>Happy Valentine's Day, My Darlin dearest! 💖</h1>
@@ -101,50 +96,44 @@
         <div class="countdown" id="countdown-timer"></div>
     </section>
 
-    <!-- Love Quotes -->
-    <section id="quotes">
-        <p id="love-quote">Welcome to our love page! 💖</p>
-    </section>
-
     <!-- Love Quiz Section -->
     <section id="quiz">
         <h2>Love Quiz</h2>
         <div class="quiz">
             <form id="quiz-form">
-                <p id="question1">When is my birthday?</p>
-                <input type="text" id="answer1" placeholder="Your answer">
+                <p>1. When is my birthday?</p>
+                <input type="text" id="question1" placeholder="Your answer">
 
-                <p id="question2">What’s your special nickname?</p>
-                <input type="text" id="answer2" placeholder="Your answer">
+                <p>2. What’s your special nickname?</p>
+                <input type="text" id="question2" placeholder="Your answer">
 
-                <p id="question3">What’s my favorite color?</p>
-                <input type="text" id="answer3" placeholder="Your answer">
+                <p>3. What’s my favorite color?</p>
+                <input type="text" id="question3" placeholder="Your answer">
 
-                <p id="question4">Who takes the best photos of us (Sadly)?</p>
-                <input type="text" id="answer4" placeholder="Your answer">
+                <p>4. Who takes the best photos of us (Sadly)?</p>
+                <input type="text" id="question4" placeholder="Your answer">
 
-                <p id="question5">What’s the name of my alive dog?</p>
-                <input type="text" id="answer5" placeholder="Your answer">
+                <p>5. What’s the name of my alive dog?</p>
+                <input type="text" id="question5" placeholder="Your answer">
 
-                <p id="question6">What’s the name of my dog who has passed away?</p>
-                <input type="text" id="answer6" placeholder="Your answer">
+                <p>6. What’s the name of my dog who has passed away?</p>
+                <input type="text" id="question6" placeholder="Your answer">
 
-                <p id="question7">What’s my cat’s name?</p>
-                <input type="text" id="answer7" placeholder="Your answer">
+                <p>7. What’s my cat’s name?</p>
+                <input type="text" id="question7" placeholder="Your answer">
 
                 <button type="button" onclick="submitQuiz()">Submit Answers</button>
             </form>
 
             <div id="quiz-result"></div>
-            <div class="result-message" id="quiz-message"></div>
         </div>
     </section>
 
-    <!-- Love Compatibility Section -->
+    <!-- Love Compatibility Calculator Section -->
     <section id="compatibility">
         <h2>Love Compatibility Calculator</h2>
-        <p>Enter your names and see how compatible you are! (Only Olivia and Charles/Charles and Olivia get 100%!)</p>
         <div class="compatibility">
+            <p>Enter two names to calculate your love compatibility! 💖</p>
             <input type="text" id="name1" placeholder="Enter first name">
             <input type="text" id="name2" placeholder="Enter second name">
             <button type="button" onclick="calculateCompatibility()">Calculate Compatibility</button>
@@ -158,40 +147,16 @@
         <img src="creator.jpg" alt="Meet the Creator">
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>“Love is all you need.” – The Beatles</p>
+        <p>Made with 💖 for you! Happy Valentine's Day!</p>
     </footer>
 
     <script>
-        // Pop-up greeting
-        window.onload = function() {
-            document.getElementById("greeting-popup").style.display = "block";
-            setTimeout(function() {
-                document.getElementById("greeting-popup").style.display = "none";
-            }, 3000); // Popup disappears after 3 seconds
-        }
-
-        // Love quotes rotation
-        const quotes = [
-            "Love is the only reality, and it’s not a mere sentiment. It’s the ultimate truth that lies at the heart of creation. – Rabindranath Tagore",
-            "You are my sun, my moon, and all my stars. – E.E. Cummings",
-            "Love is all you need. – The Beatles",
-            "Where there is love, there is life. – Mahatma Gandhi"
-        ];
-
-        let quoteIndex = 0;
-        setInterval(function() {
-            document.getElementById('love-quote').innerText = quotes[quoteIndex];
-            quoteIndex = (quoteIndex + 1) % quotes.length;
-        }, 5000); // Change quote every 5 seconds
-
-        // Countdown timer
         function countdownTimer() {
             const anniversaryDate = new Date("June 9, 2025 00:00:00").getTime();
             const now = new Date().getTime();
             const distance = anniversaryDate - now;
-
+            
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -201,49 +166,59 @@
         }
         setInterval(countdownTimer, 1000);
 
-        // Submit quiz answers
+        // Quiz Function
         function submitQuiz() {
-            let result = "Your love compatibility score is: ";
-            let correctAnswers = 0;
+            const correctAnswers = {
+                question1: "April 23, 2003",
+                question2: "Darlin",
+                question3: "Blood red",
+                question4: "Katie",
+                question5: "Ranger",
+                question6: "Star",
+                question7: "Murphy"
+            };
 
-            const correctAnswersArray = [
-                { answer: "April 23, 2003" },
-                { answer: "Darlin" },
-                { answer: "Blood red" },
-                { answer: "Katie" },
-                { answer: "Ranger" },
-                { answer: "Star" },
-                { answer: "Murphy" }
-            ];
+            const userAnswers = {
+                question1: document.getElementById("question1").value,
+                question2: document.getElementById("question2").value,
+                question3: document.getElementById("question3").value,
+                question4: document.getElementById("question4").value,
+                question5: document.getElementById("question5").value,
+                question6: document.getElementById("question6").value,
+                question7: document.getElementById("question7").value
+            };
 
-            // Loop through answers
-            for (let i = 0; i < correctAnswersArray.length; i++) {
-                const userAnswer = document.getElementById(`answer${i + 1}`).value.trim().toLowerCase();
-                const correctAnswer = correctAnswersArray[i].answer.toLowerCase();
-                if (userAnswer === correctAnswer) {
-                    correctAnswers++;
+            let score = 0;
+            let feedback = "";
+
+            for (let key in correctAnswers) {
+                if (userAnswers[key].toLowerCase() === correctAnswers[key].toLowerCase()) {
+                    score++;
+                    feedback += `<p>Question ${key.charAt(key.length - 1)}: Correct!</p>`;
+                } else {
+                    feedback += `<p>Question ${key.charAt(key.length - 1)}: Wrong! Correct answer: ${correctAnswers[key]}</p>`;
                 }
             }
 
-            result += `${correctAnswers * 12.5}%`; // Each correct answer adds 12.5%
-            document.getElementById("quiz-result").innerText = result;
-            document.getElementById("quiz-message").innerText = `You got ${correctAnswers} out of 7 correct!`;
+            const resultText = `You got ${score} out of 7 correct!`;
+            const resultMessage = score === 7 ? "Perfect! 💖" : "Good try! ❤️";
+
+            document.getElementById("quiz-result").innerHTML = `${resultText}<br>${resultMessage}<br><br>${feedback}`;
         }
 
-        // Love Compatibility Calculator
+        // Compatibility Calculator Function
         function calculateCompatibility() {
-            const name1 = document.getElementById("name1").value.trim().toLowerCase();
-            const name2 = document.getElementById("name2").value.trim().toLowerCase();
-            let compatibility = 0;
+            const name1 = document.getElementById("name1").value.toLowerCase();
+            const name2 = document.getElementById("name2").value.toLowerCase();
+            let compatibilityScore = 0;
 
-            // Check for special names
             if ((name1 === "olivia" && name2 === "charles") || (name1 === "charles" && name2 === "olivia")) {
-                compatibility = 100;
+                compatibilityScore = 100;
             } else {
-                compatibility = 0;
+                compatibilityScore = 0;
             }
 
-            document.getElementById("compatibility-result").innerText = `Your compatibility score is: ${compatibility}%`;
+            document.getElementById("compatibility-result").innerHTML = `Your compatibility score is: ${compatibilityScore}%`;
         }
     </script>
 
