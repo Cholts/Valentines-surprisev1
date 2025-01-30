@@ -165,33 +165,6 @@
             document.getElementById("quizResult").innerText = `You scored ${score.toFixed(1)}%!`;
         }
 
-        // ✅ Love Compatibility Checker
-        function checkCompatibility() {
-            let name1 = document.getElementById("name1").value.toLowerCase();
-            let name2 = document.getElementById("name2").value.toLowerCase();
-
-            if ((name1 === "olivia" && name2 === "charles") || (name1 === "charles" && name2 === "olivia")) {
-                document.getElementById("compatibilityResult").innerText = "100% - The perfect couple! 💖";
-            } else {
-                document.getElementById("compatibilityResult").innerText = "0% - Oof... Try again with Olivia and Charles!";
-            }
-        }
-
-        // ✅ Love Horoscope
-        function getHoroscope() {
-            let birthdate = new Date(document.getElementById("birthdate").value);
-            let month = birthdate.getMonth() + 1;
-            let day = birthdate.getDate();
-
-            if (month === 4 && day === 23) {
-                document.getElementById("horoscopeResult").innerText = "Taurus: Your love life is amazing today! Olivia is the best GF ever!";
-            } else if (month === 12 && day === 5) {
-                document.getElementById("horoscopeResult").innerText = "Sagittarius: Get ready for a surprise from someone special!";
-            } else {
-                document.getElementById("horoscopeResult").innerText = "Your love future is uncertain... Try again?";
-            }
-        }
-
         // ✅ Heart Drawing Works
         let canvas = document.getElementById("heartCanvas");
         let ctx = canvas.getContext("2d");
@@ -204,8 +177,10 @@
         function draw(event) {
             if (!drawing) return;
             let rect = canvas.getBoundingClientRect();
-            ctx.lineTo(event.clientX - rect.left, event.clientY - rect.top);
-            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(event.clientX - rect.left, event.clientY - rect.top, 2, 0, Math.PI * 2);
+            ctx.fillStyle = "red";
+            ctx.fill();
         }
 
         function clearCanvas() {
@@ -214,13 +189,38 @@
 
         // ✅ Compliment Generator
         function generateCompliment() {
-            const compliments = ["You're amazing!", "You're so loved!", "You're my favorite person!"];
+            const compliments = [
+                "You're amazing!", 
+                "You're so loved!", 
+                "You're my favorite person!", 
+                "You light up my life!", 
+                "You're my forever Valentine!"
+            ];
             document.getElementById("compliment").innerText = compliments[Math.floor(Math.random() * compliments.length)];
         }
 
         // ✅ Love Challenge
         function generateLoveChallenge() {
-            document.getElementById("loveChallengeResult").innerText = "Tell someone you love them today!";
+            const challenges = [
+                "Write a love note and leave it somewhere unexpected!", 
+                "Give 5 compliments today!", 
+                "Plan a surprise date night!", 
+                "Send a sweet text message right now!", 
+                "Make a list of things you love about your partner!"
+            ];
+            document.getElementById("loveChallengeResult").innerText = challenges[Math.floor(Math.random() * challenges.length)];
+        }
+
+        // ✅ Love Compatibility Checker
+        function checkCompatibility() {
+            let name1 = document.getElementById("name1").value.toLowerCase();
+            let name2 = document.getElementById("name2").value.toLowerCase();
+
+            if ((name1 === "olivia" && name2 === "charles") || (name1 === "charles" && name2 === "olivia")) {
+                document.getElementById("compatibilityResult").innerText = "100% - The perfect couple! 💖";
+            } else {
+                document.getElementById("compatibilityResult").innerText = "0% - Oof... Try again!";
+            }
         }
     </script>
 
