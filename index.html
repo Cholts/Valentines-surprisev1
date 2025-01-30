@@ -35,9 +35,6 @@
         section {
             padding: 100px 20px;
             min-height: 100vh;
-            opacity: 1; /* Changed from 0 to 1 to ensure visibility */
-            transition: opacity 1s ease-in-out;
-            visibility: visible; /* Make sure the section is visible */
         }
 
         .countdown {
@@ -264,10 +261,16 @@
         // Submit quiz answers
         function submitQuiz() {
             let result = "Your love compatibility score is: ";
-            const name1 = document.getElementById("answer1").value;
-            const name2 = document.getElementById("answer2").value;
-            result += loveCalculator(name1, name2) + "%";
+            let correctAnswers = 0;
 
+            questions.forEach((q, index) => {
+                const userAnswer = document.getElementById(`answer${index + 1}`).value;
+                if (userAnswer.trim().toLowerCase() === q.answer.toLowerCase()) {
+                    correctAnswers++;
+                }
+            });
+
+            result += `${correctAnswers * 12.5}%`; // Each correct answer adds 12.5%
             document.getElementById("quiz-result").innerText = result;
 
             // Show candy falling animation
@@ -276,16 +279,10 @@
             document.body.appendChild(candy);
         }
 
-        // Love Calculator
-        function loveCalculator(name1, name2) {
-            return name1 === "Olivia" && name2 === "Charles" ? 100 : 0;
-        }
-
         // Mystery Box
         function openMysteryBox() {
             alert("HAPPY VALENTINES DARLIN DEAREST!");
         }
-
     </script>
 </body>
 </html>
